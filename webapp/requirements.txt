@@ -1,0 +1,22 @@
+asgiref==3.6.0
+psycopg2-binary==2.9.5
+sqlparse==0.4.3
+crontab==1.0.1
+Django==4.1.6
+# django-crontab==0.7.1
+python-decouple==3.8
+python-dateutil==2.8.2
+dj-database-url==1.2.0
+django-filter==22.1
+# django-modelsdoc==0.1.11
+djangorestframework==3.14.0
+django-nonrelated-inlines==0.2
+djangorestframework-simplejwt==5.2.2
+django-admin-rangefilter==0.10.0
+# django-reversion==5.0.4
+django-jazzmin==2.6.0
+gunicorn==20.1.0
+Sphinx==6.2.1
+sphinx-rtd-theme==1.2.1
+drf-spectacular==0.26.1
+PyJWT==2.6.0
