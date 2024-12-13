@@ -81,6 +81,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
+    # https://whitenoise.readthedocs.io/en/latest/
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -109,6 +113,13 @@ TEMPLATES = [
         },
     },
 ]
+# https://whitenoise.readthedocs.io/en/latest/
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 WSGI_APPLICATION = "webapp.wsgi.application"
 
