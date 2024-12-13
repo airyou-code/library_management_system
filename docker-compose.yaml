@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    image: none
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    env_file:
+      - .env

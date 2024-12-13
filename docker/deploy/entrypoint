@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# if any of the commands in your code fails for any reason, the entire script fails
+set -o errexit
+# fail exit if one of your pipe command fails
+set -o pipefail
+# exits if any of your variables is not set
+set -o nounset
+
+postgres_ready() {
+python << END
+import sys
+import psycopg2
+from urllib.parse import urlparse
+
+try:
+    # Parse the DATABASE_URL
+    url = urlparse("${DATABASE_URL}")
+    
+    # Extract connection parameters
+    conn_params = {
+        "dbname": url.path[1:],
+        "user": url.username,
+        "password": url.password,
+        "host": url.hostname,
+        "port": url.port,
+    }
+    psycopg2.connect(**conn_params)
+except psycopg2.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+
+END
+}
+until postgres_ready; do
+  >&2 echo 'Waiting for PostgreSQL to become available...'
+  sleep 2
+done
+>&2 echo 'PostgreSQL is available'
+
+exec /start "$@"
