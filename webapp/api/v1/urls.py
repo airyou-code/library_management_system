@@ -12,6 +12,8 @@ from ..views import CustomSpectacularAPIView
 app_name = "v1"
 
 urlpatterns = [
+    path('', include("library.api.v1.urls")),
+
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path(
         'token/refresh/', TokenRefreshView.as_view(),
