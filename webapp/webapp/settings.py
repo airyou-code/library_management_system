@@ -60,6 +60,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "jazzmin",
+    'django_countries',
 
     "django.contrib.admin",
     "django.contrib.auth",
