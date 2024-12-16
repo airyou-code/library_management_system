@@ -10,11 +10,15 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
 
     def get_permissions(self):
-        if self.action in ['create', 'destroy']:
+        if self.action not in ['retrieve', 'list']:
             return [permissions.IsAdminUser()]
         return [permissions.AllowAny()]
 
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+        filters.SearchFilter
+    ]
     filterset_fields = ['author', 'availability']
     ordering_fields = ['title', 'author']
     search_fields = ['title', 'author']
