@@ -5,7 +5,14 @@ from library.models import Book, Loan
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = [
+            "title",
+            "author",
+            "ISBN",
+            "description",
+            "page_count",
+            "availability"
+        ]
 
 
 class LoanSerializer(serializers.ModelSerializer):
