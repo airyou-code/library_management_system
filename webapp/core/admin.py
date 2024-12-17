@@ -3,7 +3,8 @@ from core.models import CoreModel
 from django.contrib import admin
 
 # Register your models here.
-admin.site.site_header = "Library Management System"
+# admin.site.site_header = "Library Management System"
+admin.site.site_header = "LMS"
 
 
 class CoreAdmin(admin.ModelAdmin):
