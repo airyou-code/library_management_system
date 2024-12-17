@@ -22,6 +22,34 @@ A simple application for managing a library where users can search and borrow bo
 - **Pagination and Filtering**: Books list supports filtering and pagination.  
 - **Testing**: Unit and integration tests for models, views, and serializers.
 
+## Future Improvements and Unimplemented Features
+
+The following features are planned for future releases but are not yet implemented:
+
+1. **Generic Permission Methods**:  
+   - Refactoring and implementing more generic methods for managing permissions to simplify and centralize permission logic across the application.
+
+2. **User Profile Management**:  
+   - Allow registered users to update their personal information (e.g., name, email, etc.).  
+   - Implement functionality for registered users to change their password directly from the user interface.
+
+3. **Documentation Enhancements**:  
+   - Complete missing docstrings for models, views, and serializers to improve code readability and maintainability.  
+   - Finalize Sphinx documentation and ensure it is fully functional on the deployed host.
+
+4. **Deployment Enhancements**:  
+   - Address issues with Sphinx documentation deployment on the hosting platform.
+
+---
+
+## Logic for Registered Users
+
+- **View Books**:  
+  Registered users can view all books available in the library.
+
+- **View Loans**:  
+  Registered users can only see loan records where the `user` field matches the currently logged-in user. This ensures that users can only access their own loan information.
+
 ---
 
 ## Technologies  
