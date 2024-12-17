@@ -82,7 +82,7 @@ class CoreAdmin(admin.ModelAdmin):
             list: A list of readonly fields.
         """
 
-        if obj and self.change_fields and obj.time_created:
+        if obj and self.change_fields and obj.created_at:
 
             return [
                 field.name for field in (
