@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
+from users.models import set_library_uesr_permission
 from .forms import UserRegisterForm, UserLoginForm
 
 @csrf_exempt
@@ -12,6 +13,9 @@ def register(request):
             user = form.save()
             user.is_staff = True
             user.save()
+
+            set_library_uesr_permission(user)
+
             messages.success(
                 request,
                 "Registration successful. Redirecting to admin panel."
