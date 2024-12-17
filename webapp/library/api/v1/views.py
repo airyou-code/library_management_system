@@ -9,15 +9,30 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def get_permissions(self):
-        if self.action in ['create', 'destroy']:
-            return [permissions.IsAdminUser()]
-        return [permissions.AllowAny()]
-
-    filter_backends = [DjangoFilterBackend, filters.OrderingFilter, filters.SearchFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+        filters.SearchFilter
+    ]
     filterset_fields = ['author', 'availability']
     ordering_fields = ['title', 'author']
     search_fields = ['title', 'author']
+
+    def get_permissions(self):
+        if self.action not in ['retrieve', 'list']:
+            return [permissions.IsAdminUser()]
+        return [permissions.AllowAny()]
+
+    def perform_create(self, serializer):
+        serializer.save(
+            user_created=self.request.user,
+            user_updated=self.request.user
+        )
+
+    def perform_update(self, serializer):
+        serializer.save(
+            user_updated=self.request.user
+        )
 
 
 class LoanViewSet(viewsets.ModelViewSet):
@@ -31,11 +46,17 @@ class LoanViewSet(viewsets.ModelViewSet):
             raise ValidationError("This book is not available.")
         book.availability = False
         book.save()
-        serializer.save(user=self.request.user, status='borrowed')
+        serializer.save(
+            user=self.request.user, status='borrowed',
+            user_created=self.request.user,
+            user_updated=self.request.user
+        )
 
     def perform_update(self, serializer):
         instance = self.get_object()
         if serializer.validated_data.get('status') == 'returned':
             instance.book.availability = True
             instance.book.save()
-        serializer.save()
+        serializer.save(
+            user_updated=self.request.user
+        )

@@ -11,5 +11,8 @@ class BookSerializer(serializers.ModelSerializer):
 class LoanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Loan
-        fields = '__all__'
+        fields = [
+            "book",
+            "status",
+        ]
         read_only_fields = ('borrow_date', 'status')

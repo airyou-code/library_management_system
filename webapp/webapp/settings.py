@@ -60,6 +60,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "jazzmin",
+    'django_countries',
 
     "django.contrib.admin",
     "django.contrib.auth",
@@ -212,6 +213,9 @@ DOCS_URL = "/docs/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.LibraryUser"
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
 
 # JAZZMIN SETTINGS
 JAZZMIN_SETTINGS = {

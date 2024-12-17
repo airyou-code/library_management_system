@@ -1,5 +1,5 @@
 from drf_spectacular.views import SpectacularAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.authentication import (
     SessionAuthentication, BasicAuthentication,
@@ -30,5 +30,5 @@ class CustomSpectacularAPIView(SpectacularAPIView):
             using either JWT Authentication or Session Authentication.
     """
 
-    permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]
     authentication_classes = [JWTAuthentication, SessionAuthentication]

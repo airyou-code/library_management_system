@@ -19,16 +19,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include("api.urls"))
+    path('dashboard/', admin.site.urls),
+    path('api/', include("api.urls")),
+    path('', include("users.urls"))
 ]
 
-# NOTE: Since I can't use Nginx on the host I chose,
-# I'll use a django proxy server.
-# NOTE: In a real project, django should not process static files!!!
-# if settings.DEBUG:
-urlpatterns += static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-) + static(
-        settings.DOCS_URL, document_root=settings.DOCS_ROOT
-    )
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    ) + static(
+            settings.DOCS_URL, document_root=settings.DOCS_ROOT
+        )
