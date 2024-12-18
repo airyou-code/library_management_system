@@ -149,19 +149,19 @@ SPECTACULAR_SETTINGS = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 # DATABASES = {
-#     'default': config(
-#         'DATABASE_URL',
-#         default='postgres://user:password@127.0.0.1:5432/db_name',
-#         cast=db_url
-#     )
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
 # }
+DATABASES = {
+    'default': config(
+        'DATABASE_URL',
+        default='postgres://user:password@127.0.0.1:5432/db_name',
+        cast=db_url
+    )
+}
 
 
 # Password validation
