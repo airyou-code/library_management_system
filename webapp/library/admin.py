@@ -45,8 +45,8 @@ class LoanAdmin(CoreAdmin):
     list_filter = ('status', 'borrow_date', 'return_date')
 
     def get_readonly_fields(self, request, obj=None) -> list:
-        if (
-            not request.user.is_admin or request.user.is_superuser
+        if not (
+            request.user.is_admin or request.user.is_superuser
         ) and request.user.is_registered_user:
             readonly_fields = (
                 'user',
@@ -58,19 +58,19 @@ class LoanAdmin(CoreAdmin):
                     *readonly_fields
                 ]
             return readonly_fields
-        super().get_readonly_fields(request, obj=None)
+        return super().get_readonly_fields(request, obj=None)
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        if (
-            not request.user.is_admin or request.user.is_superuser
+        if not (
+            request.user.is_admin or request.user.is_superuser
         ) and request.user.is_registered_user:
             queryset = queryset.filter(user=request.user)
         return queryset
 
     def save_model(self, request, obj, form, change):
-        if (
-            not request.user.is_admin or request.user.is_superuser
+        if not (
+            request.user.is_admin or request.user.is_superuser
         ) and request.user.is_registered_user:
             obj.user = request.user
 
@@ -91,7 +91,6 @@ class LoanAdmin(CoreAdmin):
         if db_field.name == 'book':
             kwargs["queryset"] = Book.objects.filter(availability=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
 
 
 @admin.register(Author)
