@@ -1,8 +1,8 @@
-from django.db import models
-from core.models import CoreModel
-from django_countries.fields import CountryField
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
+from django.db import models
+from django.conf import settings
+from core.models import CoreModel
 
 
 class Author(CoreModel):
@@ -63,6 +63,7 @@ class Loan(CoreModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        null=True, blank=True,
         verbose_name=_("User"),
     )
     book = models.ForeignKey(

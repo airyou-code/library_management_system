@@ -3,11 +3,19 @@ from rest_framework.exceptions import ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
 from library.models import Book, Loan
 from .serializers import BookSerializer, LoanSerializer
+from rest_framework.pagination import PageNumberPagination
+
+
+class BookPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    pagination_class = BookPagination
 
     filter_backends = [
         DjangoFilterBackend,
